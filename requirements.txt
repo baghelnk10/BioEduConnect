@@ -28,6 +28,7 @@ pydantic
 pydantic_core
 pyngrok
 PySocks
+python==3.8
 python-dateutil
 python-gitlab
 pytz
