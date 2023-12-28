@@ -28,7 +28,7 @@ pydantic
 pydantic_core
 pyngrok
 PySocks
-python==3.9.18
+python==3.9
 python-dateutil
 python-gitlab
 pytz
