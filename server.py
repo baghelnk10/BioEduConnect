@@ -1,15 +1,6 @@
 from flask import Flask, render_template, request, session, jsonify, redirect, url_for
 import openai
-# imports
-import ast  # for converting embeddings saved as strings back to arrays
 from openai import OpenAI # for calling the OpenAI API
-import pandas as pd  # for storing text and embeddings data
-import tiktoken  # for counting tokens
-import os # for getting API token from env variable OPENAI_API_KEY
-from scipy import spatial  # for calculating vector similarities for search
-from pyngrok import ngrok
-
-# app.py
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
