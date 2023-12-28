@@ -1,0 +1,532 @@
+/* style.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #ff9800;
+}
+
+.user-section a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.user-section a:hover {
+    background-color: white;
+    color: #3f51b5;
+}
+
+#hero {
+    background-image: url('hero-background.jpg');
+    background-size: cover;
+    color: grey;
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.btn {
+    text-decoration: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #ff9800;
+}
+
+.btn-primary:hover {
+    background-color: #ff5722;
+}
+
+#featured-courses {
+    padding: 80px 0;
+    text-align: center;
+}
+
+#featured-courses h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.course-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    border-radius: 20px; /* Adjusted for a smoother appearance */
+    transition: box-shadow 0.3s ease-in-out;
+
+    /* Set a fixed height for the card */
+    height: 500px; /* Adjust based on your design preferences */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    /* Set a flexible width for the card based on the viewport size */
+    width: calc(40% - 40px); /* Subtract the margin from the width */
+}
+
+/* Reduce the card width and height on smaller screens */
+@media (max-width: 600px) {
+    .course-card {
+        width: calc(100% - 40px);
+        height: 400px;
+    }
+}
+
+.course-card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.course-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.course-card h3 {
+    font-size: 1.5em;
+    margin: 15px 20px;
+    color: #333;
+}
+
+.course-card p {
+    color: #666;
+    margin: 0 40px 20px;
+}
+
+
+.btn-secondary {
+    background-color: #ff9800;
+    color: white;
+    padding: 20px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    align-self: center;
+    width: 50%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #ff5722;
+}
+
+#about {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+#about {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-box {
+    flex: 1;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 10px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.about-box:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-box h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.about-box p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #ff5722;
+}
+
+
+#learning-materials {
+    background-color: #f5f5f5;
+    padding: 80px 0;
+    text-align: center;
+}
+
+#learning-materials h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.learning-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.learning-box {
+    flex-basis: calc(40% - 20px); /* Adjusted width for three boxes in a row */
+    margin-bottom: 20px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.learning-box:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.learning-box h3 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.learning-box a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ff9800;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.learning-box a:hover {
+    background-color: #ff5722;
+}
+
+
+.footer {
+    background-color: #3f51b5;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-right: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #ff9800;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.pdf-container {
+    display: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+}
+
+#pdf-viewer {
+    width: 100%;
+    height: 100%;
+}
+
+.other-content {
+    display: none;
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    background-color: #f1f1f1;
+    overflow: auto;
+    padding: 20px;
+}
+
+.section-title {
+    background-image: url('hero-background.jpg');
+    background-size: cover;
+    color: rgb(7, 3, 3);
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+}
+
+ul.contact-info {
+    list-style: none;
+  }
+
+  .contact-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    align-items: center;
+}  
+
+#crossword-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 90%; /* Adjust the max-width as needed */
+    max-height: 90%; /* Adjust the max-height as needed */
+    overflow: auto; /* Add overflow property to enable scrolling */
+}
+
+#crossword-container {
+    text-align: center;
+}
+
+#crossword-grid {
+    margin: 20px auto;
+}
+
+#crossword-image {
+    width: 100%;
+    max-width: 400px; /* Adjust the max-width as needed */
+    height: auto;
+}
+
+.crossword-input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.crossword-input-filled {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+#crossword-hints {
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+}
+
+#across-hints,
+#down-hints {
+    width: 48%;
+}
+
+.hint-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#crossword-images {
+    margin-top: 20px;
+}
+
+#answer-feedback {
+    margin-top: 10px;
+}
+
+
+  /* Add your own CSS styling here */
+
+  #jumble-container {
+    text-align: center;
+    margin: 20px;
+  }
+
+.jumble-input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+#jumble-words {
+    margin: 20px 0;
+}
+
+#answer-feedback {
+    margin-top: 10px;
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .course-card {
+        width: 80%; 
+        max-width: 500px;
+    }
+
+    .about-box,
+    .learning-box {
+        flex-basis: calc(100% - 20px);
+        margin: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Adjust styles for larger screens if needed */
+    .video-container {
+        width: 50%;
+        float: left;
+    }
+}    

@@ -1,0 +1,660 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>BioEduConnect</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BioEduConnect Logo">
+            <h1>BioEduConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('content') }}">Content</a></li>
+                <li><a href="{{ url_for('index') }}#about">About us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <!--div class="user-section">
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="signup.html" class="btn btn-signup">Sign Up</a>
+        </div-->
+    </header>
+
+<section id="learning-materials">
+    <h2>The Fundamental Unit of Life: Cell</h2>
+    <div class="learning-boxes">
+                <div class="learning-box" id="objective">
+                    <h2>Objectives & Outcomes</h2>
+                    <p>This section would outline the goals of the learning module and what learners should be able to achieve by the end. It could also include a brief overview of the topics covered.</p>
+                    <a id="button" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div id="popup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; height: 300px; background-color: white; border: 2px; overflow: auto;">
+                    <!-- Create the close button -->
+                    <span id="close" style="position: absolute; right: 10px; top: 10px; font-size: 20px; color: red; cursor: pointer;">&times;</span>
+                    <!-- Create the list of points -->
+                    <ol id="points" style="margin: 20px; font-family: 'Times New Roman', Times, serif; font-size: 16px;">
+                      <li>You should be able to describe the discovery of cells.</li>
+                      <li>You should be able to explain cell theory.</li>
+                      <li>You should be able to describe the structural organization of a cell.</li>
+                      <li>You should be able to list the various components of a cell and state their functions.</li>
+                      <li>You should be able to differentiate between prokaryotic and eukaryotic cells.</li>
+                      <li>You should be able to draw and label plant and animal cells.</li>
+                      <li>You should be able to have a basic understanding of chromosomes, DNA, and types of cell division.</li>
+                    </ol>
+                </div>
+                <div class="learning-box" id="book">
+                    <h2>E-book</h2>
+                    <p>This section would provide a link to an electronic book on the topic at hand. The e-book could be a comprehensive overview of the material or a more focused study guide</p>
+                    <a id="book-button" class="btn btn-secondary" onclick="showContent()">Read Now</a>
+                </div>
+                <section id="book-section" style="width: 100%; height: 100%; display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <div class="row" id="ebook" style="display: flex; flex-basis: calc(50% - 100px);">
+                      <div class="col-md-8" style="width: 100%; height: 100vh; padding: 10px; margin-right: 50px;">
+                        <div id="pdf-container" class="pdf-container" style="width: 100%; height: 100%; border: 1px solid #ccc; padding: 10px;">
+                          <iframe id="pdf-viewer" src="{{ url_for('static', filename='contents/cell.pdf') }}" frameborder="0" style="width: 100%; height: 100%; border: 0;"></iframe>
+                        </div>
+                      </div>
+                      <div class="col-md-8" style="width: 100%; padding: 10px; margin-left: 50px;">
+                        <div id="chat-container">
+                            <div id="chat-header">
+                                <span>Ask your Doubt</span>
+                            </div>
+                            <div id="chat-body">
+                                <div id="chat-messages"></div>
+                                <input type="text" id="user-input" placeholder="Type your message...">
+                                <button onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+                <div class="learning-box" id="learning">
+                    <h2>Questions & Answers</h2>
+                    <p>This section would provide links to a variety of learning materials, such as articles, webpages, and videos. These materials could provide more in-depth information on specific topics.</p>
+                    <a id="learning-button" class="btn btn-secondary" onclick="showPopup()">Read Now</a>
+                </div>
+                <section id="learning-section" style="display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <h1 style="text-align: center;">Learning by Q&A</h1>
+                            <!-- Learning Boxes -->
+                        <section>
+                            <div onclick="showLearningPopup('Introduction')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Cell and its basic Introduction</div>
+                            <div onclick="showLearningPopup('Structure')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Structure of Cell</div>
+                            <div onclick="showLearningPopup('CellWall')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Cell Wall</div>
+                            <div onclick="showLearningPopup('ProcessofDiffusion')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Process of Diffusion</div>
+                            <div onclick="showLearningPopup('Nucleus')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Nucleus</div>
+                        </section>
+                        <section>
+                            <div onclick="showLearningPopup('EukaryoticandProkaryotic cell')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Eukaryotic and Prokaryotic Cell</div>
+                            <div onclick="showLearningPopup('Cytoplasm')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Cytoplasm</div>
+                            <div onclick="showLearningPopup('CellOrganelles')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Cell Organelles</div>
+                            <div onclick="showLearningPopup('EndoplasmicReticulum')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Endoplasmic Reticulum</div>
+                            <div onclick="showLearningPopup('GolgiBodies')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Golgi Bodies</div>
+                        </section>
+                        <section>
+                            <div onclick="showLearningPopup('Lysosomes')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Lysosomes</div>
+                            <div onclick="showLearningPopup('Mitochondria')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Mitochondria</div>
+                            <div onclick="showLearningPopup('Plastids')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">plastids</div>
+                            <div onclick="showLearningPopup('Chromoplast')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Chromoplast</div>
+                        </section>
+                        <div style="text-align: center; justify-content: space-evenly; align-items: center; flex-basis: calc(80% - 20px);">
+                            <div onclick="showLearningPopup('Leucoplast')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Leucoplast</div>
+                            <div onclick="showLearningPopup('Vacuole')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Vacuole</div>    
+                            <div onclick="showLearningPopup('CellDivision')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Cell Division</div>
+                        </div>
+                        <div id="learningPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 1000; width: 70%; max-width: 800px;">
+                            <span onclick="closeLearningPopup()" style="cursor: pointer; position: absolute; top: 10px; right: 10px;">Close &#10006;</span>
+                            <p id="topicContent">Topic content will appear here...</p>
+                            <label for="topicSelect">Select a topic:</label>
+                            <select id="topicSelect" onchange="showLearningPopup()" style="margin-top: 10px;">
+                                <option value="Introduction">Introduction to cells</option>
+                                <option value="Structure">Structure of Cell</option>
+                                <option value="CellWall">Cell wall</option>
+                                <option value="ProcessofDiffusion">Process of Diffusion</option>
+                                <option value="Nucleus">Nucleus</option>
+                                <option value="EukaryoticandProkaryotic cell">Eukaryotic and Prokaryotic cell</option>
+                                <option value="Cytoplasm">Cytoplasm</option>
+                                <option value="CellOrganelles">Cell Organelles</option>
+                                <option value="EndoplasmicReticulum">Endoplasmic Reticulum</option>
+                                <option value="GolgiBodies">Golgi Bodies</option>
+                                <option value="Lysosomes">Lysosomes</option>
+                                <option value="Mitochondria">Mitochondria</option>
+                                <option value="Plastids">Plastids</option>
+                                <option value="Chromoplast">Chromoplast</option>
+                                <option value="Leucoplast">Leucoplast</option>
+                                <option value="Vacuole">Vacuole</option>
+                                <option value="CellDivision">Cell Division</option>
+                            </select>
+                            <label for="questionSelect">Select a question:</label>
+                            <select id="questionSelect" onchange="showQuestionContent()" style="margin-top: 10px;">
+                                <!-- Initial option added in JavaScript -->
+                            </select>
+                            <div id="contentContainer"></div>
+                        </div>
+                </section>
+                <div class="learning-box" id="games">
+                    <h2>Educational Games</h2>
+                    <p>This section would provide links to educational games that can help learners test their knowledge and understanding of the material. Games can be a fun and engaging way to learn, and they can help to reinforce what learners have learned.</p>
+                    <a id="game-button" class="btn btn-secondary" onclick="showPopupgame()">Play Now</a>
+                </div>
+                <section id="game-section" style="display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <h1 style="text-align: center;">Crossword</h1>
+                    <button id="show-crossword">Show Crossword</button>
+                    <div id="crossword-popup">
+                        <div id="crossword-container">
+                        <div id="crossword-images">
+                            <img id="crossword-image" src="" alt="Crossword Image">
+                        </div>
+                        <div id="crossword-hints">
+                            <div id="across-hints">
+                                <h3>Across</h3>
+                            
+                                <!-- 1. Who makes protein -->
+                                <label class="hint-label" for="answer1">3. Who makes protein: </label>
+                                <input type="text" id="answer1" class="crossword-input" maxlength="8">
+                                <button class="submit-answer" onclick="checkAnswer('answer1', 'Ribosomes')">Submit</button>
+                            
+                                <!-- 2. Interior of the cell, mostly water -->
+                                <label class="hint-label" for="answer2">5. Interior of the cell, mostly water: </label>
+                                <input type="text" id="answer2" class="crossword-input" maxlength="9">
+                                <button class="submit-answer" onclick="checkAnswer('answer2', 'Cytoplasm')">Submit</button>
+                            
+                                <!-- 3. 1st person to see cells -->
+                                <label class="hint-label" for="answer3">8. 1st person to see cells: </label>
+                                <input type="text" id="answer3" class="crossword-input" maxlength="11">
+                                <button class="submit-answer" onclick="checkAnswer('answer3', 'RobertHooke')">Submit</button>
+                            
+                                <!-- 4. Stores water; large in plants -->
+                                <label class="hint-label" for="answer4">9. Stores water; large in plants: </label>
+                                <input type="text" id="answer4" class="crossword-input" maxlength="7">
+                                <button class="submit-answer" onclick="checkAnswer('answer4', 'Vacuole')">Submit</button>
+                            
+                                <!-- 5. Transport within the cell; endoplasmic__ -->
+                                <label class="hint-label" for="answer5">10. Transport within the cell; endoplasmic__: </label>
+                                <input type="text" id="answer5" class="crossword-input" maxlength="21">
+                                <button class="submit-answer" onclick="checkAnswer('answer5', 'EndoplasmicReticulum')">Submit</button>
+                            
+                                <!-- 6. Photosynthetic organelle in plants -->
+                                <label class="hint-label" for="answer6">13. Photosynthetic organelle in plants: </label>
+                                <input type="text" id="answer6" class="crossword-input" maxlength="10">
+                                <button class="submit-answer" onclick="checkAnswer('answer6', 'Chloroplast')">Submit</button>
+                            
+                                <!-- 7. Tail-like structure that functions in movement -->
+                                <label class="hint-label" for="answer7">14. Tail-like structure that functions in movement: </label>
+                                <input type="text" id="answer7" class="crossword-input" maxlength="8">
+                                <button class="submit-answer" onclick="checkAnswer('answer7', 'Flagellum')">Submit</button>
+                            
+                            
+                            </div>
+                            <div id="down-hints">
+                                <h3>Down</h3>
+                            
+                                <!-- 1. "Powerhouse" of the cell -->
+                                <label class="hint-label" for="answer8">1. "Powerhouse" of the cell: </label>
+                                <input type="text" id="answer8" class="crossword-input" maxlength="13">
+                                <button class="submit-answer" onclick="checkAnswer('answer8', 'Mitochondria')">Submit</button>
+                            
+                                <!-- 2. Organelles that break down substances -->
+                                <label class="hint-label" for="answer9">2. Organelles that break down substances: </label>
+                                <input type="text" id="answer9" class="crossword-input" maxlength="9">
+                                <button class="submit-answer" onclick="checkAnswer('answer9', 'Lysosomes')">Submit</button>
+                            
+                                <!-- 3. Outer boundary of the cell -->
+                                <label class="hint-label" for="answer10">4. Outer boundary of the cell: </label>
+                                <input type="text" id="answer10" class="crossword-input" maxlength="13">
+                                <button class="submit-answer" onclick="checkAnswer('answer10', 'CellMembrane')">Submit</button>
+                            
+                                <!-- 4. Maintains the cell’s shape -->
+                                <label class="hint-label" for="answer11">5. Maintains the cell’s shape: </label>
+                                <input type="text" id="answer11" class="crossword-input" maxlength="12">
+                                <button class="submit-answer" onclick="checkAnswer('answer11', 'Cytoskeleton')">Submit</button>
+                            
+                                <!-- 5. Tool used to view cells -->
+                                <label class="hint-label" for="answer12">6. Tool used to view cells: </label>
+                                <input type="text" id="answer12" class="crossword-input" maxlength="10">
+                                <button class="submit-answer" onclick="checkAnswer('answer12', 'Microscope')">Submit</button>
+                            
+                                <!-- 6. Makes ribosomes -->
+                                <label class="hint-label" for="answer13">7. Makes ribosomes: </label>
+                                <input type="text" id="answer13" class="crossword-input" maxlength="8">
+                                <button class="submit-answer" onclick="checkAnswer('answer13', 'Nucleolus')">Submit</button>
+                            
+                                <!-- 7. Packaging and exporting; ____ body -->
+                                <label class="hint-label" for="answer14">11. Packaging and exporting; ____ body: </label>
+                                <input type="text" id="answer14" class="crossword-input" maxlength="15">
+                                <button class="submit-answer" onclick="checkAnswer('answer14', 'GolgiApparatus')">Submit</button>
+                            
+                                <!-- 8. In plants, structure outside the membrane; cell -->
+                                <label class="hint-label" for="answer15">12. In plants, structure outside the membrane; cell: </label>
+                                <input type="text" id="answer15" class="crossword-input" maxlength="9">
+                                <button class="submit-answer" onclick="checkAnswer('answer15', 'CellWall')">Submit</button>
+                            
+                            </div>
+                            
+                        </div>
+                        <div id="answer-feedback"></div>
+                        </div>
+                        <button id="close-crossword">Close Crossword</button>
+                    </div>
+                    <h1 style="text-align: center;">Jumble Words</h1>
+                    <div id="jumble-container">
+                      <div id="jumble-words">
+                        <p>Unscramble the words and fill in the blanks:</p>
+                        <p>1. SLPAIDST <input type="text" id="answer1j" class="jumble-input" maxlength="8"> <button class="submit-answer" onclick="checkJumbleAnswer('answer1j', 'PLASTIDS')">Submit</button></p>
+                        <p>2. SSITOMI <input type="text" id="answer2j" class="jumble-input" maxlength="7"> <button class="submit-answer" onclick="checkJumbleAnswer('answer2j', 'MITOSIS')">Submit</button></p>
+                        <p>3. OSSSIMO <input type="text" id="answer3j" class="jumble-input" maxlength="7"> <button class="submit-answer" onclick="checkJumbleAnswer('answer3j', 'OSMOSIS')">Submit</button></p>
+                        <p>4. GGBODESIIOL <input type="text" id="answer4j" class="jumble-input" maxlength="11"> <button class="submit-answer" onclick="checkJumbleAnswer('answer4j', 'GOLGIBODIES')">Submit</button></p>
+                        <p>5. RLOOSTACLHL <input type="text" id="answer5j" class="jumble-input" maxlength="11"> <button class="submit-answer" onclick="checkJumbleAnswer('answer5j', 'CHLOROPLAST')">Submit</button></p>
+                      </div>
+                      <div id="answer-feedback-jumble"></div>
+                    </div>
+                </section>    
+                <div class="learning-box" id="vision">
+                    <h2>Diagrams</h2>
+                    <p>This section would provide links to diagrams and other visuals that can help learners to understand complex concepts. Visuals can be a great way to break down information and make it more understandable.</p>
+                    <a id="diagram-button" class="btn btn-secondary" onclick="showPopupdiagram()">View Diagrams</a>
+                </div>
+                <section id="diagram-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Diagrams</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 50%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/cell.png') }}" alt="Image 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Cell</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/cellorganelles.png') }}" alt="Image 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Cell Organelles </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/mitochondria.png') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Mitochondria</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/nucleus.png') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Nucleus</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/typesofplastids.png') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Types of Plastids</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/meiosis.png') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Meiosis</div>
+                        </div>
+                    </div>
+                
+                    <div style="width: 50%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/pcellacell.png') }}" alt="Image 4" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Plant Cell and Animal cell</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/golgi.png') }}" alt="Image 5" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Golgi Apparatus</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/ribosome.png') }}" alt="Image 6" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Ribosomes</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/plastids.png') }}" alt="Image 6" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Plastids</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/mitosis.png') }}" alt="Image 6" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Mitosis</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/mitosisvsmeiosis.png') }}" alt="Image 6" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Mitosis vs Meiosis</div>
+                        </div>
+                    </div>
+                </section>                         
+                <div class="learning-box" id="cvideos">
+                    <h2>Videos</h2>
+                    <p>This section would provide links to videos that can help learners to learn about the topic at hand. Videos can be a great way to learn from experts and to see concepts in action.</p>
+                    <a id="videos-button" class="btn btn-secondary" onclick="showPopupvideos()">Watch Now</a>
+                </div>
+                <section id="videos-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Animation & Explanation Videos</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div class="video-container" style="width: 80%; max-width: 500px; justify-content: space-between; padding: 15px;">
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video1" width="560" height="315" src="https://www.youtube.com/embed/URUJD5NEXC8?si=ry8dv43JId6cz9ts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Cell</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video2" width="560" height="315" src="https://www.youtube.com/embed/iA8hFSHS6Ho?si=DibyvgGVab2SZk3i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Golgi Apparatus</div>
+                        </div>
+                    </div>
+                
+                    <div class="video-container" style="width: 80%; max-width: 500px; justify-content: space-between; padding: 15px;">
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video3" width="560" height="315" src="https://www.youtube.com/embed/39HTpUG1MwQ?si=mA_EixMeO3Wlnv6Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Mitochondria</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video4" width="560" height="315" src="https://www.youtube.com/embed/DwAFZb8juMQ?si=jcRSPLXnWxGa1tU4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Mitosis vs Meiosis</div>
+                        </div>
+                    </div>
+                </section> 
+                <div class="learning-box" id="vision">
+                    <h2>Concept Maps/Mind Maps</h2>
+                    <p>This section would provide links to concept maps or mind maps that can help learners to see how different topics are related to each other. Concept maps and mind maps can be a great way to organize information and to make it easier to remember</p>
+                    <a id="maps-button" class="btn btn-secondary" onclick="showPopupmaps()">Watch Now</a>
+                </div>
+                <section id="maps-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Concept Maps</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 100%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/cell1.png') }}" alt="Image 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/cell2.png') }}" alt="Image 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/cell3.jpg') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/Cell4.jpg') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                    </div>
+                </section> 
+                <div class="learning-box" id="vision">
+                    <h2>Revision Points</h2>
+                    <p>This section would provide links to key points that learners should review before taking an exam or assessment. Revision points can be a great way to focus studying and to make sure that learners are covering all of the important material.</p>
+                    <a id="revision-button" class="btn btn-secondary" onclick="showPopuprevision()">Watch Now</a>
+                </div>
+                <section id="revision-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Revision Notes</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 100%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rcell1.png') }}" alt="Image 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 1</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rcell2.png') }}" alt="Image 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 2</div>
+                        </div>
+                    </div>
+                </section>
+                <div class="learning-box" id="vision">
+                    <h2>Test Series</h2>
+                    <p> This section would provide links to practice tests that learners can take to assess their understanding of the material. Practice tests can be a great way to identify areas where learners need more study and to build confidence before taking an actual exam.</p>
+                    <a id="testbutton" class="btn btn-secondary">Take Tests</a>
+                </div>
+                <div id="testpopup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; height: 300px; background-color: white; border: 2px; overflow: auto;">
+                    <!-- Create the close button -->
+                    <span id="testclose" style="position: absolute; right: 10px; top: 10px; font-size: 20px; color: red; cursor: pointer;">&times;</span>
+                    <!-- Create the list of points -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScX5wdZfRAZ8vJqGTmLgF0Y1FgciA3O-HB7pYlrzS8yO3DQUg/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 10%;">Test 1</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeO0bEHLmFoRNYaDS7gzxWjgAnTfr9gL4Sj8XpGjhGXmT0FQw/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 30%;">Test 2</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfws89mPG4ui3LhHyh96wj1sGH5SOVLUETT6eGzCldUVw3-XA/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 50%;">Test 3</a>
+                </div>
+               <div class="learning-box" id="vision">
+                    <h2>Discussion Board</h2>
+                    <p> This section would provide a forum for learners to discuss the material with each other. Discussion boards can be a great way to get different perspectives on a topic and to learn from other learners.</p>
+                    <a href="https://discord.com/invite/z6KP7wQK" class="btn btn-secondary" onclick="confirmDiscordJoin()">Join Discussions</a>
+                </div>                                    
+            </div>
+        </section>
+
+
+
+        <footer class="mt-5">
+            <p style="font-size: 20px; color: rgb(241, 234, 234);">&copy; BioEduConnect. All rights reserved.</p>
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+         | <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        </footer>
+        <script src="{{ url_for('static', filename='js/chap1.js') }}"></script>
+        <script>
+            // Get the button element
+            var button = document.getElementById("button");
+            var testbutton = document.getElementById("testbutton");
+            // Get the pop-up window element
+            var popup = document.getElementById("popup");
+            var testpopup = document.getElementById("testpopup");
+            // Get the close button element
+            var close = document.getElementById("close");
+            var testclose = document.getElementById("testclose");
+            // Add a click event listener to the button
+            button.addEventListener("click", function() {
+              // Show the pop-up window
+              popup.style.display = "block";
+            });
+
+            testbutton.addEventListener("click", function() {
+              // Show the pop-up window
+              testpopup.style.display = "block";
+            });
+        
+            // Add a click event listener to the close button
+            close.addEventListener("click", function() {
+              // Hide the pop-up window
+              popup.style.display = "none";
+            });
+
+            testclose.addEventListener("click", function() {
+              // Hide the pop-up window
+              testpopup.style.display = "none";
+            });
+          </script>
+          <script>
+        
+              var contentMap = {
+                'Introduction': 'Introduction to cells',
+                'Structure': 'Cell structure and functions',
+                'CellWall': 'Cell wall',
+                'ProcessofDiffusion': 'Process of Diffusion',
+                'Nucleus': 'Nucleus',
+                'EukaryoticandProkaryotic cell': 'Eukaryotic and Prokaryotic cell',
+                'Cytoplasm': 'Cytoplasm',
+                'CellOrganelles': 'Cell Organelles',
+                'EndoplasmicReticulum': 'Endoplasmic Reticulum ',
+                'GolgiBodies': 'Golgi Bodies',
+                'Lysosomes': 'Lysosomes',
+                'Mitochondria': 'Mitochondria',
+                'Plastids': 'Plastids',
+                'Chromoplast': 'Chromoplast',
+                'Leucoplast': 'Leucoplast',
+                'Vacuole': 'Vacuole',
+                'CellDivision': 'Cell Division ',
+              };
+        
+              var questionMap = {
+                'Introduction': ['What is the Fundamental Unit of Life', 'Who discovered cells?'],
+                'Structure': ['What is the structure of Cell', 'What is the diagram of plant and animal cell'],
+                'CellWall': ['what is Cell membrane?', 'what is Cell wall', 'what is cellulose'],
+                'ProcessofDiffusion': ['what is osmosis?', 'what is Plasmolysis?'],
+                'Nucleus': ['Which Cell Organelles contain Chromosomes?', 'what is nucleoid'],
+                'EukaryoticandProkaryotic cell': ['what is the difference between Eukaryotic and Prokaryotic Cell?', 'Draw the structure of both Eukaryotic and Prokaryotic Cell'],
+                'Cytoplasm': ['What is cytoplasm', 'What is the role of Cytoplasm'],
+                'CellOrganelles': ['what is cell organelles?', 'Draw the schematic of Cell organelles?'],
+                'EndoplasmicReticulum': ['What is the function of the Endoplasmic Reticulum in a cell?', 'Distinguish between rough Endoplasmic Reticulum and smooth Endoplasmic Reticulum.'],
+                'GolgiBodies': ['What is the role of Golgi Bodies in the cell?', 'Explain the process of protein modification and packaging by Golgi Bodies.'],
+                'Lysosomes': ['What are the functions of Lysosomes in cellular processes?', 'Discuss the significance of Lysosomes in the intracellular digestion process.'],
+                'Mitochondria': ['Explain the structure and function of Mitochondria in a cell.', 'How does Mitochondria contribute to cellular respiration and energy production?'],
+                'Plastids': ['What are Plastids, and what is their role in plant cells?','Distinguish between chloroplasts, chromoplasts, and leucoplasts in Plastids.'],
+                'Chromoplast': ['Describe the function of Chromoplasts in plant cells.', 'What is the role of Chromoplasts in the coloration of flowers and fruits?'],
+                'Leucoplast': ['Explain the functions of Leucoplasts in plant cells.', 'How do Leucoplasts contribute to the storage of nutrients in plant cells?'],
+                'Vacuole': ['What is the function of the Vacuole in plant cells?', 'Discuss the role of the Vacuole in maintaining turgor pressure and storage.'],
+                'CellDivision': ['Describe the process of cell division in eukaryotic cells.', 'Explain the significance of cell division in growth, repair, and reproduction.'],
+              };
+        
+
+              var answerMap = {
+                    'Introduction_0': 'The fundamental unit of life is the cell.',
+                    'Introduction_1': 'Cells were discovered by Robert Hooke in 1665.',
+                    'Structure_0': 'The structure of a cell includes a cell membrane, cytoplasm, and a nucleus.',
+                    'Structure_1': 'The diagram of a plant cell includes cell wall, chloroplasts, and a large central vacuole. The diagram of an animal cell includes a cell membrane and various organelles.',
+                    'CellWall_0': 'The cell membrane is a selectively permeable membrane that surrounds the cell.',
+                    'CellWall_1': 'The cell wall is a rigid layer outside the cell membrane, providing structural support. Cellulose is a main component of the cell wall.',
+                    'ProcessofDiffusion_0': 'Osmosis is the movement of water molecules across a selectively permeable membrane.',
+                    'ProcessofDiffusion_1': 'Plasmolysis is the contraction of the cell contents due to the loss of water.',
+                    'Nucleus_0': 'The nucleus contains chromosomes, which carry genetic information.',
+                    'Nucleus_1': 'Nucleoid is a term used in prokaryotic cells, referring to the region where the genetic material is located.',
+                    'EukaryoticandProkaryotic cell_0': 'Eukaryotic cells have a true nucleus and membrane-bound organelles. Prokaryotic cells lack a true nucleus and membrane-bound organelles.',
+                    'EukaryoticandProkaryotic cell_1': 'The structure of a eukaryotic cell includes a nucleus, endoplasmic reticulum, Golgi apparatus, mitochondria, and more. A prokaryotic cell is simpler in structure.',
+                    'Cytoplasm_0': 'Cytoplasm is the gel-like substance inside the cell that surrounds the organelles.',
+                    'Cytoplasm_1': 'The role of cytoplasm includes providing a medium for cellular activities and maintaining the shape of the cell.',
+                    'CellOrganelles_0': 'Cell organelles are specialized structures within a cell that perform specific functions.',
+                    'CellOrganelles_1': 'A schematic of cell organelles typically includes structures like the nucleus, mitochondria, endoplasmic reticulum, Golgi apparatus, and more.',
+                    'EndoplasmicReticulum_0': 'The Endoplasmic Reticulum (ER) plays a crucial role in the synthesis and transport of proteins and lipids within the cell.',
+                    'EndoplasmicReticulum_1': 'Rough ER has ribosomes on its surface and is involved in protein synthesis, while smooth ER is involved in lipid synthesis and detoxification.',
+                    'GolgiBodies_0': 'Golgi Bodies play a key role in modifying, packaging, and transporting proteins within the cell.',
+                    'GolgiBodies_1': 'The Golgi apparatus modifies proteins by adding carbohydrates and packages them into vesicles for secretion or use within the cell.',
+                    'Lysosomes_0': 'Lysosomes are involved in intracellular digestion and the breakdown of cellular waste.',
+                    'Lysosomes_1': 'The significance of Lysosomes lies in their ability to maintain cellular homeostasis by recycling cellular components.',
+                    'Mitochondria_0': 'Mitochondria are the powerhouse of the cell, producing ATP through cellular respiration.',
+                    'Mitochondria_1': 'Mitochondria contribute to energy production by converting nutrients into usable energy in the form of ATP.',
+                    'Plastids_0': 'Plastids are organelles found in plant cells responsible for various functions like photosynthesis and storage.',
+                    'Plastids_1': 'Chloroplasts contain chlorophyll and are involved in photosynthesis. Chromoplasts provide color to flowers and fruits. Leucoplasts are involved in the storage of nutrients.',
+                    'Chromoplast_0': 'Chromoplasts are plastids responsible for the synthesis and storage of pigments, contributing to the coloration of flowers and fruits.',
+                    'Chromoplast_1': 'The role of Chromoplasts is to produce and store pigments, giving color to specific plant structures.',
+                    'Leucoplast_0': 'Leucoplasts are colorless plastids involved in the storage of starch, lipids, and proteins.',
+                    'Leucoplast_1': 'Leucoplasts contribute to the storage of nutrients and energy reserves in plant cells.',
+                    'Vacuole_0': 'The Vacuole in plant cells functions in maintaining turgor pressure, storing nutrients, and degrading waste products.',
+                    'Vacuole_1': 'The Vacuole plays a crucial role in maintaining the rigidity of plant cells by regulating the water content.',
+                    'CellDivision_0': 'Cell division is the process by which a cell divides into two or more daughter cells.',
+                    'CellDivision_1': 'Cell division is significant for growth, repair of damaged tissues, and reproduction in both unicellular and multicellular organisms.'
+                };
+
+                function showLearningPopup() {
+                    var popup = document.getElementById('learningPopup');
+                    var topicSelect = document.getElementById('topicSelect');
+                    var questionSelect = document.getElementById('questionSelect');
+                    var contentContainer = document.getElementById('contentContainer');
+
+                    var topic = topicSelect.value;
+                    var questionIndex = questionSelect.value;
+
+                    // Display topic content
+                    document.getElementById('topicContent').innerHTML = contentMap[topic];
+
+                    // Populate question options
+                    questionSelect.innerHTML = '<option value="" selected disabled>Select a question</option>';
+                    for (var i = 0; i < questionMap[topic].length; i++) {
+                        var option = document.createElement('option');
+                        option.value = i;
+                        option.text = questionMap[topic][i];
+                        questionSelect.add(option);
+                    }
+
+                    // Display the learning popup
+                    popup.style.display = 'block';
+                }
+
+                function showQuestionContent() {
+                    var questionSelect = document.getElementById('questionSelect');
+                    var contentContainer = document.getElementById('contentContainer');
+                    var topicSelect = document.getElementById('topicSelect');
+
+                    var topic = topicSelect.value;
+                    var questionIndex = questionSelect.value;
+
+                    // Combine topic and question index to form a unique key
+                    var key = topic + '_' + questionIndex;
+
+                    // Display question content
+                    contentContainer.innerHTML = answerMap[key] || 'Answer not available';
+                }
+
+                function closeLearningPopup() {
+                    var popup = document.getElementById('learningPopup');
+                    popup.style.display = 'none';
+                }
+          </script>
+            <script>
+                // Add your own JavaScript code here
+                document.getElementById('show-crossword').addEventListener('click', function() {
+                  document.getElementById('crossword-popup').style.display = 'block';
+                  // Set the crossword image source dynamically (replace 'path_to_image' with your local image path)
+                  document.getElementById('crossword-image').src = "{{ url_for('static', filename='images/cellcrossword.png') }}";
+                });
+            
+                document.getElementById('close-crossword').addEventListener('click', function() {
+                  document.getElementById('crossword-popup').style.display = 'none';
+                });
+            
+                function checkAnswer(inputId, correctAnswer) {
+                  var userAnswer = document.getElementById(inputId).value;
+                  var feedbackDiv = document.getElementById('answer-feedback');
+            
+                  if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    feedbackDiv.textContent = 'Correct!';
+                  } else {
+                    feedbackDiv.textContent = 'Incorrect. Try again!';
+                  }
+                }
+              </script>
+               <script>
+                // Add your own JavaScript code here
+            
+                function checkJumbleAnswer(inputId, correctAnswer) {
+                    var userAnswer = document.getElementById(inputId).value;
+                    var feedbackDiv = document.getElementById('answer-feedback-jumble');
+            
+                    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                        feedbackDiv.textContent = 'Correct!';
+                    } else {
+                        feedbackDiv.textContent = 'Incorrect. Try again!';
+                    }
+                }
+              </script>
+              <script>
+                function confirmDiscordJoin() {
+                    var confirmJoin = confirm("Join our Community for a discussion over a large topics on Discord server");
+                    if (confirmJoin) {
+                        window.location.href = "https://discord.com/invite/z6KP7wQK";
+                    }
+                }
+            </script>
+
+
+</body>
+</html>

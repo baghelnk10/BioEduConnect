@@ -1,0 +1,89 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Home-BioEduConnect</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BioEduConnect Logo">
+            <h1>BioEduConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('content') }}">Content</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <!--div class="user-section">
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="signup.html" class="btn btn-signup">Sign Up</a>
+        </div-->
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Unlock the Power of AI in Biology Education</h1>
+            <p>Join BioEduConnect for interactive learning, quizzes, and more! through Artificial Intelligence.</p>
+            <a href="{{ url_for('content') }}" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <section id="featured-courses">
+        <h2>Featured Topics</h2>
+        <div class="course-cards">
+            <!-- Add featured course cards here -->
+            <div class="course-card">
+                <img src="{{ url_for('static', filename='images/topic1.jpg') }}" alt="Course Image">
+                <h3>The Fundamental Unit of Life: Cell</h3>
+                <a href="{{ url_for('chap1') }}" class="btn btn-secondary">Learn More</a>
+            </div>
+
+            <div class="course-card">
+                <img src="{{ url_for('static', filename='images/topic2.jpg') }}" alt="Course Image">
+                <h3>Tissue</h3>
+                <a href="{{ url_for('chap2') }}" class="btn btn-secondary">Learn More</a>
+            </div>
+
+            <div class="course-card">
+                <img src="{{ url_for('static', filename='images/topic3.png') }}" alt="Course Image">
+                <h3>Improvement of Food Resources</h3>
+                <a href="{{ url_for('chap3') }}" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <div class="about-box" id="goal">
+                <h2>Goal</h2>
+                <p>Our goal is to provide you with a strong foundation in biology for class 9 by simplifying complex concepts and promoting a deeper understanding of the subject.</p>
+            </div>
+            <div class="about-box" id="mission">
+                <h2>Mission</h2>
+                <p>As an academic platform, BioEduConnect's mission is to impart quality science education and instill a spirit of promoting conceptual understanding and critical thinking through innovative teaching methodologies.</p>
+            </div>
+            <div class="about-box" id="vision">
+                <h2>Vision</h2>
+                <p>We envision a future where students and teachers leverage scalable digital infrastructure, prioritizing students and teachers in the entire student lifecycle in Science (Biology), beginning in 9th grade.</p>
+            </div>
+        </div>
+    </section>
+
+
+        <footer class="mt-5">
+            <p style="font-size: 20px; color: rgb(241, 234, 234);">&copy; BioEduConnect. All rights reserved.</p>
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+         | <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        </footer>
+</body>
+</html>

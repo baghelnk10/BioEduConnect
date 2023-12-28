@@ -1,0 +1,454 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>Food-BioEduConnect</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BioEduConnect Logo">
+            <h1>BioEduConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('content') }}">Content</a></li>
+                <li><a href="{{ url_for('index') }}#about">About us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <!--div class="user-section">
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="signup.html" class="btn btn-signup">Sign Up</a>
+        </div-->
+    </header>
+
+<section id="learning-materials">
+    <h2>Improvement in Food Resources</h2>
+    <div class="learning-boxes">
+                <div class="learning-box" id="objective">
+                    <h2>Objectives & Outcomes</h2>
+                    <p>This section would outline the goals of the learning module and what learners should be able to achieve by the end. It could also include a brief overview of the topics covered.</p>
+                    <a id="button" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div id="popup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; height: 300px; background-color: white; border: 2px; overflow: auto;">
+                    <!-- Create the close button -->
+                    <span id="close" style="position: absolute; right: 10px; top: 10px; font-size: 20px; color: red; cursor: pointer;">&times;</span>
+                    <!-- Create the list of points -->
+                    <ol id="points" style="margin: 20px; font-family: 'Times New Roman', Times, serif; font-size: 16px;">
+                      <li>You should be able to learn the three main practices for improving crop yield viz., crop variety improvement, crop production
+                        improvement and crop protection management.</li>
+                      <li>You should be able to hold discussion on how one can bring about improvement in food resources.</li>
+                      <li>You should be able to understand how Biotic and Abiotic factors affect crop production.</li>
+                      <li>You should be able to learn about the different desirable agronomic characteristics.</li>
+                      <li>You should be able to differentiate between manure and fertilizers.</li>
+                      <li>You should be able to understand the importance of irrigation and following specific cropping pattern.</li>
+                    </ol>
+                </div>
+                <div class="learning-box" id="book">
+                    <h2>E-book</h2>
+                    <p>This section would provide a link to an electronic book on the topic at hand. The e-book could be a comprehensive overview of the material or a more focused study guide</p>
+                    <a id="book-button" class="btn btn-secondary" onclick="showContent()">Read Now</a>
+                </div>
+                <section id="book-section" style="width: 100%; height: 100%; display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <div class="row" id="ebook" style="display: flex; flex-basis: calc(50% - 100px);">
+                      <div class="col-md-8" style="width: 100%; height: 100vh; padding: 10px; margin-right: 50px;">
+                        <div id="pdf-container" class="pdf-container" style="width: 100%; height: 100%; border: 1px solid #ccc; padding: 10px;">
+                          <iframe id="pdf-viewer" src="{{ url_for('static', filename='contents/food.pdf') }}" frameborder="0" style="width: 100%; height: 100%; border: 0;"></iframe>
+                        </div>
+                      </div>
+                      <div class="col-md-8" style="width: 100%; padding: 10px; margin-left: 50px;">
+                        <div id="chat-container">
+                            <div id="chat-header">
+                                <span>Ask your Doubt</span>
+                            </div>
+                            <div id="chat-body">
+                                <div id="chat-messages"></div>
+                                <input type="text" id="user-input" placeholder="Type your message...">
+                                <button onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+                <div class="learning-box" id="learning">
+                    <h2>Questions & Answers</h2>
+                    <p>This section would provide links to a variety of learning materials, such as articles, webpages, and videos. These materials could provide more in-depth information on specific topics.</p>
+                    <a id="learning-button" class="btn btn-secondary" onclick="showPopup()">Read Now</a>
+                </div>
+                <section id="learning-section" style="display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <h1 style="text-align: center;">Learning by Q&A</h1>
+                            <!-- Learning Boxes -->
+                        <section>
+                            <div onclick="showLearningPopup('CropYield')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Improvement In Crop Yield</div>
+                            <div onclick="showLearningPopup('AnimalHusbandry')" style="width: 150px; height: 120px; margin: 10px; background-color: lightblue; display: inline-flex; cursor: pointer; text-align: center; line-height: 1.2; border-radius: 10px; align-items: center; justify-content: center;">Animal Husbandry</div>
+                        </section>
+                        <div id="learningPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 1000; width: 70%; max-width: 800px;">
+                            <span onclick="closeLearningPopup()" style="cursor: pointer; position: absolute; top: 10px; right: 10px;">Close &#10006;</span>
+                            <p id="topicContent">Topic content will appear here...</p>
+                            <label for="topicSelect">Select a topic:</label>
+                            <select id="topicSelect" onchange="showLearningPopup()" style="margin-top: 10px;">
+                                <option value="CropYield">Improvement In Crop Yield</option>
+                                <option value="AnimalHusbandry">Animal Husbandry</option>
+                            </select>
+                            <label for="questionSelect">Select a question:</label>
+                            <select id="questionSelect" onchange="showQuestionContent()" style="margin-top: 10px;">
+                                <!-- Initial option added in JavaScript -->
+                            </select>
+                            <div id="contentContainer"></div>
+                        </div>
+                </section>
+                <div class="learning-box" id="games">
+                    <h2>Educational Games</h2>
+                    <p>This section would provide links to educational games that can help learners test their knowledge and understanding of the material. Games can be a fun and engaging way to learn, and they can help to reinforce what learners have learned.</p>
+                    <a id="game-button" class="btn btn-secondary" onclick="showPopupgame()">Play Now</a>
+                </div>
+                <section id="game-section" style="display: none;">
+                    <button onclick="goBackToOriginalPage()">Go Back</button>
+                    <h1 style="text-align: center;">Jumble Words</h1>
+                    <div id="jumble-container">
+                        <div id="jumble-words">
+                          <img src="{{ url_for('static', filename='images/foodword.png') }}" alt="gameImage 2" style="max-width: 50%; height: auto; border-radius: 8px; align-items: center;">
+                          <p>Find 6 words related with Plant Tissue (Hints: Length of Word):</p>
+                          <p>1. 5 Letter Word <input type="text" id="answer1j" class="jumble-input" maxlength="5"> <button class="submit-answer" onclick="checkJumbleAnswer('answer1j', 'WATER')">Submit</button></p>
+                          <p>2. 3 Letter Word <input type="text" id="answer2j" class="jumble-input" maxlength="3"> <button class="submit-answer" onclick="checkJumbleAnswer('answer2j', 'AIR')">Submit</button></p>
+                          <p>3. 4 Letter Word <input type="text" id="answer3j" class="jumble-input" maxlength="4"> <button class="submit-answer" onclick="checkJumbleAnswer('answer3j', 'SOIL')">Submit</button></p>
+                          <p>4. 6 Letter Word <input type="text" id="answer4j" class="jumble-input" maxlength="6"> <button class="submit-answer" onclick="checkJumbleAnswer('answer4j', 'PLANTS')">Submit</button></p>
+                          <p>5. 11 Letter Word <input type="text" id="answer5j" class="jumble-input" maxlength="11"> <button class="submit-answer" onclick="checkJumbleAnswer('answer5j', 'FOSSILFUELS')">Submit</button></p>
+                          <p>6. 8 Letter Word <input type="text" id="answer6j" class="jumble-input" maxlength="8"> <button class="submit-answer" onclick="checkJumbleAnswer('answer6j', 'SUNLIGHT')">Submit</button></p>
+                        </div>
+                        <div id="answer-feedback-jumble"></div>
+                    </div>
+                </section>    
+                <div class="learning-box" id="vision">
+                    <h2>Diagrams</h2>
+                    <p>This section would provide links to diagrams and other visuals that can help learners to understand complex concepts. Visuals can be a great way to break down information and make it more understandable.</p>
+                    <a id="diagram-button" class="btn btn-secondary" onclick="showPopupdiagram()">View Diagrams</a>
+                </div>
+                <section id="diagram-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Diagrams</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 50%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/intercropping.png') }}" alt="Image 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Intercropping</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/fish.png') }}" alt="Image 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Different Breeds of Fish </div>
+                        </div>
+                        
+                    </div>
+                
+                    <div style="width: 50%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/differentcrops.png') }}" alt="Image 4" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Different Types of Crops</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/diagrams/farming.png') }}" alt="Image 5" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Organic Farming</div>
+                        </div>
+                    </div>
+                </section>                         
+                <div class="learning-box" id="cvideos">
+                    <h2>Videos</h2>
+                    <p>This section would provide links to videos that can help learners to learn about the topic at hand. Videos can be a great way to learn from experts and to see concepts in action.</p>
+                    <a id="videos-button" class="btn btn-secondary" onclick="showPopupvideos()">Watch Now</a>
+                </div>
+                <section id="videos-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Animation & Explanation Videos</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 50%; box-sizing: border-box; float: left; padding: 15px;">
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video1" width="560" height="315" src="https://www.youtube.com/embed/xkhZZp0Nzrw?si=EBUkj-vxNz8Iv0J2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Food Resources</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video2" width="560" height="315" src="https://www.youtube.com/embed/zSCR2K81IRo?si=Gp4zuWgToimlsxHs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Crop production Management</div>
+                        </div>
+                    </div>
+                
+                    <div style="width: 50%; box-sizing: border-box; float: left; padding: 15px;">
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video3" width="560" height="315" src="https://www.youtube.com/embed/5RQU2V1CCAk?si=wGwdJE-qEFGBpfD1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Irrigation</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <iframe id="youtube-video4" width="560" height="315" src="https://www.youtube.com/embed/Bc1UJZTcHkc?si=7jQthBujYawb2txi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Animal Husbandry</div>
+                        </div>
+                    </div>
+                </section> 
+                <div class="learning-box" id="vision">
+                    <h2>Concept Maps/Mind Maps</h2>
+                    <p>This section would provide links to concept maps or mind maps that can help learners to see how different topics are related to each other. Concept maps and mind maps can be a great way to organize information and to make it easier to remember</p>
+                    <a id="maps-button" class="btn btn-secondary" onclick="showPopupmaps()">Watch Now</a>
+                </div>
+                <section id="maps-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Concept Maps</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div class="video-container" style="width: 100%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/food1.png') }}" alt="mImage 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/food2.png') }}" alt="mImage 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/food3.jpg') }}" alt="mImage 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/food4.png') }}" alt="mImage 4" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/food5.png') }}" alt="mImage 5" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;"></div>
+                        </div>
+                    </div>
+                </section> 
+                <div class="learning-box" id="vision">
+                    <h2>Revision Points</h2>
+                    <p>This section would provide links to key points that learners should review before taking an exam or assessment. Revision points can be a great way to focus studying and to make sure that learners are covering all of the important material.</p>
+                    <a id="revision-button" class="btn btn-secondary" onclick="showPopuprevision()">Watch Now</a>
+                </div>
+                <section id="revision-section" style="display: none; width: 100%;">
+                    <h1 style="text-align: center;">Revision Notes</h1>
+                    <div style="text-align: center;">
+                        <button onclick="goBackToOriginalPage()">Go Back</button>
+                    </div>
+                    <div style="width: 100%; box-sizing: border-box; float: left;">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rfood1.png') }}" alt="Image 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 1</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rfood2.png') }}" alt="Image 2" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 2</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rfood3.png') }}" alt="Image 3" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 3</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rfood4.png') }}" alt="Image 4" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 4</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static', filename='images/conceptsmaps/rfood5.png') }}" alt="Image 5" style="max-width: 100%; height: auto; border-radius: 8px;">
+                            <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">Page 5</div>
+                        </div>
+                    </div>
+                </section>
+                <div class="learning-box" id="vision">
+                    <h2>Test Series</h2>
+                    <p> This section would provide links to practice tests that learners can take to assess their understanding of the material. Practice tests can be a great way to identify areas where learners need more study and to build confidence before taking an actual exam.</p>
+                    <a id="testbutton" class="btn btn-secondary">Take Tests</a>
+                </div>
+                <div id="testpopup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; height: 300px; background-color: white; border: 2px; overflow: auto;">
+                    <!-- Create the close button -->
+                    <span id="testclose" style="position: absolute; right: 10px; top: 10px; font-size: 20px; color: red; cursor: pointer;">&times;</span>
+                    <!-- Create the list of points -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSerKjqtQxBHOxU8D3faet00n1pdjVEhn4xP1-8HmosmUByKSA/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 10%;">Test 1</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8gf6Ctwd9cGaAmdiqDF4fe0ftx965uDRrG7_YS29f4ECqig/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 30%;">Test 2</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSezujl7MK_2kaTkUsJJBI1l_aPHahK4ql3a0Zc6Iz4xju0eMA/viewform?usp=sf_link" class="btn btn-secondary" style="position: fixed; left: 10%; top: 50%;">Test 3</a>
+                </div>
+               <div class="learning-box" id="vision">
+                    <h2>Discussion Board</h2>
+                    <p> This section would provide a forum for learners to discuss the material with each other. Discussion boards can be a great way to get different perspectives on a topic and to learn from other learners.</p>
+                    <a href="https://discord.com/invite/z6KP7wQK" class="btn btn-secondary" onclick="confirmDiscordJoin()">Join Discussions</a>
+                </div>                                    
+            </div>
+        </section>
+
+
+
+        <footer class="mt-5">
+            <p style="font-size: 20px; color: rgb(241, 234, 234);">&copy; BioEduConnect. All rights reserved.</p>
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+         | <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        </footer>
+        <script src="{{ url_for('static', filename='js/chap3.js') }}"></script>
+        <script>
+            // Get the button element
+            var button = document.getElementById("button");
+            var testbutton = document.getElementById("testbutton");
+            // Get the pop-up window element
+            var popup = document.getElementById("popup");
+            var testpopup = document.getElementById("testpopup");
+            // Get the close button element
+            var close = document.getElementById("close");
+            var testclose = document.getElementById("testclose");
+            // Add a click event listener to the button
+            button.addEventListener("click", function() {
+              // Show the pop-up window
+              popup.style.display = "block";
+            });
+
+            testbutton.addEventListener("click", function() {
+              // Show the pop-up window
+              testpopup.style.display = "block";
+            });
+        
+            // Add a click event listener to the close button
+            close.addEventListener("click", function() {
+              // Hide the pop-up window
+              popup.style.display = "none";
+            });
+
+            testclose.addEventListener("click", function() {
+              // Hide the pop-up window
+              testpopup.style.display = "none";
+            });
+          </script>
+          <script>
+        
+              var contentMap = {
+                'CropYield': 'Improvement In Crop Yield',
+                'AnimalHusbandry': 'Animal Husbandry'
+              };
+        
+              var questionMap = {
+                'CropYield': ['What are the major activities for improving crop yields?', 'What are the major activities comes under Crop variety improvement?', 'What do you understand by the term weed?', 'What is the concept of Crop Protection management?'],
+                'AnimalHusbandry': ['What is Animal Husbandry?', 'What are the type of fishing?', 'What are the type of Nutrients?', 'What is Poultry Farming?', 'What do you understand by the term Manure?']
+              };
+        
+
+              var answerMap = {
+                    'CropYield_0': 'The major groups of activities for improving crop yields can be classified as: 1. Crop variety improvement 2. Crop production improvement 3. Crop protection management.',
+                    'CropYield_1': 'Higher yield: To increase the productivity of the crop per acre., Improved quality: Quality considerations of crop products vary from crop to crop, Biotic and abiotic resistance: Crops production can go down due to biotic (diseases, insects and nematodes) and abiotic (drought, salinity, water logging, heat, cold and frost) stresses under different situations. Varieties resistant to these stresses can improve crop production. , Change in maturity duration: The shorter the duration of the crop from sowing to harvesting, the more economical is the variety. Such short durations allow farmers to grow multiple rounds of crops in a year. Uniform maturity makes the harvesting process easy and reduces losses during harvesting. Wider adaptability: Developing varieties for wider adaptability will help in stabilizing the crop production under different environmental conditions. One variety can then be grown under different climatic conditions in different areas., Desirable agronomic characteristics: Tallness and profuse branching are desirable characters for fodder crops. Dwarfness is desired in cereals, so that less nutrients are consumed by these crops. Thus developing varieties of desired agronomic characters help give higher productivity.',
+                    'CropYield_2': 'Weeds are unwanted plants in the cultivated field, for example, Xanthium (gokhroo), Parthenium (gajar ghas), Cyperinus rotundus (motha). Weeds take up nutrients and reduce the growth of the crop.',
+                    'CropYield_3': 'Field crops are infested by a large number of weeds, insect pests and diseases. If weeds and pests are not controlled at the appropriate time then they can damage the crops so much that most of the crop is lost. So with the help of Crop Protection management farmers preserve our crops.',
+                    'AnimalHusbandry_0': 'Animal husbandry is the scientific management of animal livestock. It includes various aspects such as feeding, breeding and disease control. Animal-based farming includes cattle, goat, sheep, poultry and fish farming.',
+                    'AnimalHusbandry_1': 'Fish is a cheap source of animal protein for our food. Fish production includes the finned true fish as well as shellfish such as prawns and molluscs. There are two ways of obtaining fish. One is from natural resources, which is called capture fishing. The other way is by fish farming, which is called culture fishery.',
+                    'AnimalHusbandry_2': 'Nutrients are supplied to plants by air, water and soil. Some are required in large quantities and are therefore called macro-nutrients (nitrogen, phosphorus, potassium, calcium, magnesium, sulphur). The other nutrients are used by plants in small quantities and are therefore called micro-nutrients (iron, manganese, boron, zinc, copper, molybdenum, chlorine.',
+                    'AnimalHusbandry_3': 'Poultry farming is undertaken to raise domestic fowl for egg production and chicken meat. Therefore, improved poultry breeds are developed and farmed to produce layers for eggs and broilers for meat. The level of vitamins A and K is kept high in the poultry feeds.',
+                    'AnimalHusbandry_4': 'Manure is prepared by the decomposition of animal excreta and plant waste. Manure helps in enriching soil with nutrients and organic matter and increasing soil fertility. The bulk of organic matter in manure helps in improving the soil structure. Based on the kind of biological material used, manure can be classified as: Compost and vermi-compost & Green manure.'
+                };
+
+                function showLearningPopup() {
+                    var popup = document.getElementById('learningPopup');
+                    var topicSelect = document.getElementById('topicSelect');
+                    var questionSelect = document.getElementById('questionSelect');
+                    var contentContainer = document.getElementById('contentContainer');
+
+                    var topic = topicSelect.value;
+                    var questionIndex = questionSelect.value;
+
+                    // Display topic content
+                    document.getElementById('topicContent').innerHTML = contentMap[topic];
+
+                    // Populate question options
+                    questionSelect.innerHTML = '<option value="" selected disabled>Select a question</option>';
+                    for (var i = 0; i < questionMap[topic].length; i++) {
+                        var option = document.createElement('option');
+                        option.value = i;
+                        option.text = questionMap[topic][i];
+                        questionSelect.add(option);
+                    }
+
+                    // Display the learning popup
+                    popup.style.display = 'block';
+                }
+
+                function showQuestionContent() {
+                    var questionSelect = document.getElementById('questionSelect');
+                    var contentContainer = document.getElementById('contentContainer');
+                    var topicSelect = document.getElementById('topicSelect');
+
+                    var topic = topicSelect.value;
+                    var questionIndex = questionSelect.value;
+
+                    // Combine topic and question index to form a unique key
+                    var key = topic + '_' + questionIndex;
+
+                    // Display question content
+                    contentContainer.innerHTML = answerMap[key] || 'Answer not available';
+                }
+
+                function closeLearningPopup() {
+                    var popup = document.getElementById('learningPopup');
+                    popup.style.display = 'none';
+                }
+          </script>
+            <script>
+                // Add your own JavaScript code here
+                document.getElementById('show-crossword').addEventListener('click', function() {
+                  document.getElementById('crossword-popup').style.display = 'block';
+                  // Set the crossword image source dynamically (replace 'path_to_image' with your local image path)
+                  document.getElementById('crossword-image').src = "{{ url_for('static', filename='images/cellcrossword.png') }}";
+                });
+            
+                document.getElementById('close-crossword').addEventListener('click', function() {
+                  document.getElementById('crossword-popup').style.display = 'none';
+                });
+            
+                function checkAnswer(inputId, correctAnswer) {
+                  var userAnswer = document.getElementById(inputId).value;
+                  var feedbackDiv = document.getElementById('answer-feedback');
+            
+                  if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    feedbackDiv.textContent = 'Correct!';
+                  } else {
+                    feedbackDiv.textContent = 'Incorrect. Try again!';
+                  }
+                }
+              </script>
+               <script>
+                // Add your own JavaScript code here
+            
+                function checkJumbleAnswer(inputId, correctAnswer) {
+                    var userAnswer = document.getElementById(inputId).value;
+                    var feedbackDiv = document.getElementById('answer-feedback-jumble');
+            
+                    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                        feedbackDiv.textContent = 'Correct!';
+                    } else {
+                        feedbackDiv.textContent = 'Incorrect. Try again!';
+                    }
+                }
+              </script>
+              <script>
+                function confirmDiscordJoin() {
+                    var confirmJoin = confirm("Join our Community for a discussion over a large topics on Discord server");
+                    if (confirmJoin) {
+                        window.location.href = "https://discord.com/invite/z6KP7wQK";
+                    }
+                }
+            </script>
+
+
+</body>
+</html>

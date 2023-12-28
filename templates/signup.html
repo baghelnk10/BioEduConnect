@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>BioEduConnect - Sign Up</title>
+    <style>
+        /* Common styles for both pages */
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        header {
+            background-color: #010103;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+        header img {
+            height: 60px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #9cb4d8;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #9cb4d8;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #7f97c1;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .success {
+            color: green;
+            margin-bottom: 15px;
+        }
+        .link {
+            display: block;
+            color: #9cb4d8;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .terms a {
+            color: #9cb4d8;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styles for the sign up page only */
+        .signup-page .name {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .signup-page .name input {
+            width: 48%;
+        }
+        .signup-page .name input:first-child {
+            margin-right: 4%;
+        }
+        .signup-page .show {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .signup-page .show input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .signup-page .show label {
+            display: inline;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- Sign up page -->
+<div class="signup-page">
+    <header>
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        <a href="login.html">Log in</a>
+    </header>
+    <main>
+        <h1>Sign up for Khan Academy</h1>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+        <form action="signup.php" method="post">
+            <div class="error" id="error-signup"></div>
+            <div class="name">
+                <input type="text" id="first-name" name="first-name" placeholder="First name" required>
+                <input type="text" id="last-name" name="last-name" placeholder="Last name" required>
+            </div>
+            <label for="email-signup">Email</label>
+            <input type="email" id="email-signup" name="email-signup" required>
+            <label for="password-signup">Password</label>
+            <input type="password" id="password-signup" name="password-signup" required>
+            <div class="show">
+                <input type="checkbox" id="show-signup" name="show-signup">
+                <label for="show-signup">Show password</label>
+            </div>
+            <button type="submit" id="submit-signup">Sign up</button>
+            <div class="terms">
+                By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+    // Add some JavaScript code to handle form validation and submission
+</script>
+</body>
+</html>

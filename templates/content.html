@@ -1,0 +1,66 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Content-BioEduConnect</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BioEduConnect Logo">
+            <h1>BioEduConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('content') }}">Content</a></li>
+                <li><a href="{{ url_for('index') }}#about">About us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <!--div class="user-section">
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="signup.html" class="btn btn-signup">Sign Up</a>
+        </div-->
+    </header>
+
+<section id="learning-materials">
+    <h2>Class 9</h2>
+    <div class="learning-boxes">
+                <div class="learning-box" id="goal">
+                    <h2>Chapter 1</h2>
+                    <h3>The fundamental unit of life: Cell</h3>
+                    <p>This Content of this topic solely focuses on NCERT Syllabus from Class 9 Chapter 1 but You will have a all new experience of learning topics with the help of AI.</p>
+                    <a class="btn btn-secondary" href="{{ url_for('chap1') }}">Start Learning</a>
+                </div>
+                <div class="learning-box" id="mission">
+                    <h2>Chapter 2</h2>
+                    <h3>Tissues</h3>
+                    <p>This Content of this topic solely focuses on NCERT Syllabus from Class 9 Chapter 2 but You will have a all new experience of learning topics with the help of AI.</p>
+                    <a class="btn btn-secondary" href="{{ url_for('chap2') }}">Start Learning</a>
+                </div>
+                <div class="learning-box" id="vision">
+                    <h2>Chapter 3</h2>
+                    <h3>Improvement in Food Resources</h3>
+                    <p>This Content of this topic solely focuses on NCERT Syllabus from Class 9 Chapter 3. You will have a all new experience of learning topics with the help of AI.</p>
+                    <a href="{{ url_for('chap3') }}" class="btn btn-secondary">Start Learning</a>
+                </div>                                  
+            </div>
+        </section>
+
+
+
+        <footer class="mt-5">
+            <p style="font-size: 20px; color: rgb(241, 234, 234);">&copy; BioEduConnect. All rights reserved.</p>
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+         | <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        </footer>
+
+
+</body>
+</html>

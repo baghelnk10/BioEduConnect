@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>BioEduConnect - Login</title>
+    <style>
+        /* Common styles for both pages */
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        header {
+            background-color: #01050a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+        header img {
+            height: 60px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #9cb4d8;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #9cb4d8;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #7f97c1;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .success {
+            color: green;
+            margin-bottom: 15px;
+        }
+        .link {
+            display: block;
+            color: #9cb4d8;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .terms a {
+            color: #9cb4d8;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styles for the login page only */
+        .login-page .remember {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .login-page .remember input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .login-page .remember label {
+            display: inline;
+            margin-bottom: 0;
+        }
+        .login-page .forgot {
+            display: block;
+            color: #9cb4d8;
+            text-align: right;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
+        .login-page .forgot:hover {
+            text-decoration: underline;
+        }
+        .login-page .social {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .login-page .social button {
+            width: 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-page .social button img {
+            height: 20px;
+            margin-right: 10px;
+        }
+        .login-page .social button.facebook {
+            background-color: #3b5998;
+        }
+        .login-page .social button.facebook:hover {
+            background-color: #2d4373;
+        }
+        .login-page .social button.google {
+            background-color: #db4437;
+        }
+        .login-page .social button.google:hover {
+            background-color: #c23321;
+        }
+
+        /* Styles for the sign up page only */
+        .signup-page .name {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .signup-page .name input {
+            width: 48%;
+        }
+        .signup-page .name input:first-child {
+            margin-right: 4%;
+        }
+        .signup-page .show {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .signup-page .show input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .signup-page .show label {
+            display: inline;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login page -->
+<div class="login-page">
+    <header>
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        <a href="signup.html">Sign up</a>
+    </header>
+    <main>
+        <h1>Log in to BioEduConnect</h1>
+        <p>Need an account? <a href="signup.html">Create one</a></p>
+        <form action="login.php" method="post">
+            <div class="error" id="error-login"></div>
+            <label for="email-login">Email or username</label>
+            <input type="text" id="email-login" name="email-login" required>
+            <label for="password-login">Password</label>
+            <input type="password" id="password-login" name="password-login" required>
+            <div class="remember">
+                <input type="checkbox" id="remember-login" name="remember-login" checked>
+                <label for="remember-login">Remember me</label>
+            </div>
+            <a href="#" class="forgot">Forgot your password?</a>
+            <button type="submit" id="submit-login" style="margin-bottom: 5px;">Log in</button>
+            <!--div class="social">
+                <button type="button" class="facebook"><i class="fa fa-facebook" style="margin-right: 5px;"></i> Continue with Facebook </button>
+                <button type="button" class="google"><i class="fa fa-google" style="margin-right: 5px;"></i> Continue with Google </button>
+            </div-->              
+            <!--a href="#" class="link">Or log in with email</a-->
+        </form>
+    </main>
+</div>
+
+<script>
+    // Add some JavaScript code to handle form validation and submission
+</script>
+</body>
+</html>
