@@ -21,14 +21,14 @@ idna
 importlib-metadata
 itsdangerous==1.1.0
 Jinja2
-markupsafe>=2.0.1,<3.0.0
+markupsafe
 numpy 
 openai 
 pydantic
 pydantic_core
 pyngrok
 PySocks
-python>=3.7,<3.11
+python=3.9.18
 python-dateutil
 python-gitlab
 pytz
