@@ -21,10 +21,9 @@ idna
 importlib-metadata
 itsdangerous==1.1.0
 Jinja2
-MarkupSafe 
+markupsafe>=2.0.1,<3.0.0
 numpy 
 openai 
-pandas==1.4.4
 pydantic
 pydantic_core
 pyngrok
