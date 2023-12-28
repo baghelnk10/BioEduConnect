@@ -6,3 +6,4 @@ tiktoken
 requests
 numpy
 Werkzeug==1.0.1
+gunicorn
