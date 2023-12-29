@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, jsonify, redirect, url_for
 import os
 from openai import OpenAI
-
+import openai
 app = Flask(__name__)
 
 # Set your OpenAI API key from the environment variable
