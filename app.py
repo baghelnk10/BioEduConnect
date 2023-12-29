@@ -1,29 +1,14 @@
 from flask import Flask, render_template, request, session, jsonify, redirect, url_for
-import openai
-from openai import OpenAI # for calling the OpenAI API
-from flask_sqlalchemy import SQLAlchemy
+import os
+from openai import OpenAI
+
 app = Flask(__name__)
 
-# Configure the Flask app with your database URI
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Adjust the URI as needed
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable the modification tracking
-
-# Initialize the Flask-SQLAlchemy extension
-#db = SQLAlchemy(app)
-
-#class User(db.Model):
-    #id = db.Column(db.Integer, primary_key=True)
-    #email = db.Column(db.String(120), unique=True, nullable=False)
-    #password = db.Column(db.String(60), nullable=False)
-
-# Set your OpenAI API key
-openai.api_key = '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'
+# Set your OpenAI API key from the environment variable
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Your GPT model
 GPT_MODEL = "gpt-3.5-turbo"
-
-# Set a secret key for session management
-#app.secret_key = 'your-secret-key'
 
 @app.route('/')
 def index():
