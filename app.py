@@ -56,7 +56,7 @@ def process_query():
     # models
     response = openai.chat.completions.create(
         messages=[
-            {'role': 'system', 'content': 'You are responsible for responding to High School-level questions pertaining to the chapter titled "The Fundamental Unit of Life: Cell." If users inquire about topics other than this or seek responses unrelated to the specified chapter, kindly inform them that you can only address questions related to the designated subject. Please adhere to the provided guidelines.'},
+            {'role': 'system', 'content': 'You are responsible for responding to High School-level questions pertaining to the chapters titled "The Fundamental Unit of Life: Cell.", "Tissues", and "Improvement in Food Resources." only. If users inquire about topics other than this or seek responses unrelated to the specified chapter, kindly inform them that you can only address questions related to the designated subject. Please adhere to the provided guidelines.'},
             {'role': 'user', 'content': f"{user_query}"},
             ],
         model=GPT_MODEL,
